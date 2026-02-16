@@ -22,24 +22,16 @@ This module provides the Heather-specific compiler implementation that extends H
 
 The compilation process follows these stages:
 
-```
-Heather Source Code (.hat files)
-         ↓
-   Grammar Parser
-         ↓
-  Abstract Syntax Tree (AST)
-         ↓
-    IR Visitor/Builder
-         ↓
-Intermediate Representation (IR)
-         ↓
-      IR Graph
-         ↓
-   Built-in Modules Integration
-         ↓
-     IR Graph Build/Link
-         ↓
-   Executable IR (ready for executor)
+```mermaid
+flowchart TD
+    A[Heather Source Code<br/>.hat files] --> B[Grammar Parser]
+    B --> C[Abstract Syntax Tree<br/>AST]
+    C --> D[IR Visitor/Builder]
+    D --> E[Intermediate Representation<br/>IR]
+    E --> F[IR Graph]
+    F --> G[Built-in Modules Integration]
+    G --> H[IR Graph Build/Link]
+    H --> I[Executable IR<br/>ready for executor]
 ```
 
 ### compile_project_ir()

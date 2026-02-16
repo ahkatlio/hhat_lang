@@ -61,24 +61,18 @@ class Executor(BaseExecutor):
 
 ### Execution Flow
 
-```
-IR Graph
-    ↓
-Executor.run()
-    ↓
-Executor.walk()
-    ↓
-┌─────────────────┐
-│ Instruction?    │
-├─────────────────┤
-│ Classical  → CExecutor
-│ Quantum    → QExecutor
-│ Hybrid     → Both
-└─────────────────┘
-    ↓
-Memory Updates
-    ↓
-Result/Output
+```mermaid
+flowchart TD
+    A[IR Graph] --> B[Executor.run]
+    B --> C[Executor.walk]
+    C --> D{Instruction?}
+    D -->|Classical| E[CExecutor]
+    D -->|Quantum| F[QExecutor]
+    D -->|Hybrid| G[Both]
+    E --> H[Memory Updates]
+    F --> H
+    G --> H
+    H --> I[Result/Output]
 ```
 
 ### run() Method

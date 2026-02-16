@@ -151,14 +151,15 @@ H-hat supports multiple scope levels:
 - **Closure**: Captured variables in nested functions
 
 **Variable Resolution**:
-```
-Local Scope (current stack frame)
-       ↓ (if not found)
-Parent Scopes (stack frame chain)
-       ↓ (if not found)
-Global Scope (heap)
-       ↓ (if not found)
-Error: Undefined Variable
+```mermaid
+flowchart TD
+    A[Local Scope<br/>current stack frame] --> B[Parent Scopes<br/>stack frame chain]
+    B --> C[Global Scope<br/>heap]
+    C --> D[Error: Undefined Variable]
+    
+    A -.if not found.-> B
+    B -.if not found.-> C
+    C -.if not found.-> D
 ```
 
 ## Memory Operations

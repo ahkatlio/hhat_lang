@@ -87,28 +87,18 @@ class QiskitBackend:
 
 ### Submission Workflow
 
-```
-H-hat Program
-      ↓
-Quantum IR
-      ↓
-LLQ Translation (OpenQASM/NetQASM)
-      ↓
-Backend Adapter
-      ↓
-Platform-Specific Format
-      ↓
-Backend API
-      ↓
-Quantum Device/Simulator
-      ↓
-Execution
-      ↓
-Measurement Results
-      ↓
-Backend Adapter
-      ↓
-H-hat Data Types
+```mermaid
+flowchart TD
+    A[H-hat Program] --> B[Quantum IR]
+    B --> C[LLQ Translation<br/>OpenQASM/NetQASM]
+    C --> D[Backend Adapter]
+    D --> E[Platform-Specific Format]
+    E --> F[Backend API]
+    F --> G[Quantum Device/Simulator]
+    G --> H[Execution]
+    H --> I[Measurement Results]
+    I --> J[Backend Adapter]
+    J --> K[H-hat Data Types]
 ```
 
 ### Backend Abstraction

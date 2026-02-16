@@ -74,16 +74,12 @@ class OpenQASMManager(BaseLLQManager):
 ### Translation Process
 
 **High-Level Overview**:
-```
-H-hat Quantum IR
-       ↓
-  LLQ Manager
-       ↓
-Quantum Language Code
-       ↓
-  Target Backend
-       ↓
-Quantum Execution
+```mermaid
+flowchart TD
+    A[H-hat Quantum IR] --> B[LLQ Manager]
+    B --> C[Quantum Language Code]
+    C --> D[Target Backend]
+    D --> E[Quantum Execution]
 ```
 
 **Detailed Workflow**:

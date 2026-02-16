@@ -92,23 +92,15 @@ QuantumProgram(
 
 The execution model implements a sophisticated fallback mechanism:
 
-```
-User Code
-    ↓
-IR Representation
-    ↓
-Quantum Backend Execution
-    ↓
-┌─────────────────────────────────┐
-│ Instruction Type?               │
-├─────────────────────────────────┤
-│ Quantum → MUST be in backend    │
-│            or ERROR              │
-│                                  │
-│ Classical → Try backend first   │
-│            → Fallback to dialect │
-│            → ERROR if neither    │
-└─────────────────────────────────┘
+```mermaid
+flowchart TD
+    A[User Code] --> B[IR Representation]
+    B --> C[Quantum Backend Execution]
+    C --> D{Instruction Type?}
+    D -->|Quantum| E[MUST be in backend<br/>or ERROR]
+    D -->|Classical| F[Try backend first]
+    F --> G[Fallback to dialect]
+    G --> H[ERROR if neither]
 ```
 
 This ensures:

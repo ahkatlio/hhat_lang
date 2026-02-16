@@ -39,18 +39,13 @@ When quantum code needs to execute:
 4. **Results**: Returns measurement outcomes
 5. **Post-processing**: Converts results back to H-hat types
 
-```
-H-hat Quantum IR
-       ↓
-BaseLLQManager.translate()
-       ↓
-Target Quantum Language
-       ↓
-Quantum Backend Execution
-       ↓
-Measurement Results
-       ↓
-H-hat Data Types
+```mermaid
+flowchart TD
+    A[H-hat Quantum IR] --> B[BaseLLQManager.translate]
+    B --> C[Target Quantum Language]
+    C --> D[Quantum Backend Execution]
+    D --> E[Measurement Results]
+    E --> F[H-hat Data Types]
 ```
 
 ### Manager Responsibilities

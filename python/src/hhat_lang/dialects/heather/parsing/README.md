@@ -33,24 +33,16 @@ This module is the heart of Heather's front-end compilation pipeline, implementi
 
 ### Parsing Pipeline
 
-```
-Heather Source Code
-        ↓
-Grammar Rules (PEG)
-        ↓
-    Parser (Arpeggio)
-        ↓
-Parse Tree (Concrete Syntax Tree)
-        ↓
-  Visitor Pattern
-        ↓
-Semantic Actions
-        ↓
-Abstract Syntax Tree (AST)
-        ↓
-  IR Construction
-        ↓
-Intermediate Representation
+```mermaid
+flowchart TD
+    A[Heather Source Code] --> B[Grammar Rules<br/>PEG]
+    B --> C[Parser<br/>Arpeggio]
+    C --> D[Parse Tree<br/>Concrete Syntax Tree]
+    D --> E[Visitor Pattern]
+    E --> F[Semantic Actions]
+    F --> G[Abstract Syntax Tree<br/>AST]
+    G --> H[IR Construction]
+    H --> I[Intermediate Representation]
 ```
 
 ### parse() Function
