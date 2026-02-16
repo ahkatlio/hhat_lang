@@ -31,6 +31,10 @@ nav:
         - dialects/heather/index.md
         - Syntax: dialects/heather/syntax.md
         - Grammar: dialects/heather/grammar.md
+  - Brand:
+      - Visual Identity: brand/identity.md
+      - Color Palette: brand/colors.md
+      - Logo: brand/logo.md
   - Blog:
       - blog/index.md
 
