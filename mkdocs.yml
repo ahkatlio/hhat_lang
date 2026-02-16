@@ -6,31 +6,44 @@ repo_url: "https://github.com/hhat-lang/hhat_lang/"
 repo_name: hhat-lang/hhat_lang
 
 nav:
-  - Home:
-      - H-hat language: index.md
-      - How to Contribute: how_contribute.md
-  - Getting Started:
-      - Getting Started: getting_started.md
-      - Guides:
-          - Python: python/python_guide.md
-          - Rust: rust/rust_guide.md
-      - Understanding H-hat:
-          - Rule System: rule_system.md
-          - Nomenclature: core/naming.md
-          - Language design: core/language_design.md
-          - Compiler framework: core/compiler_framework.md
-          - Documentation design: core/doc_design.md
-      - Tools:
-          - toolchain.md
-          - CLI: cli.md
-      - Running it:
-          - running_hhat.md
+  - Home: index.md
+  - Getting Started: getting_started.md
+  - Introduction:
+      - What is H-hat?: introduction/what_is_hhat.md
+      - Why H-hat?: introduction/why_hhat.md
+      - Key Features: introduction/features.md
+      - Code Organization: introduction/organization.md
+  - Language Concepts:
+      - Rule System: rule_system.md
+      - Nomenclature: core/naming.md
+      - Language Design: core/language_design.md
+      - Compiler Framework: core/compiler_framework.md
+      - Documentation Design: core/doc_design.md
+  - Examples:
+      - Heather Examples:
+          - Your First H-hat Code: dialects/heather/examples/first_code.md
+          - Calling Functions: dialects/heather/examples/calling_fn.md
+          - Casting Quantum Types: dialects/heather/examples/casting_quantum.md
+          - Defining New Types: dialects/heather/examples/new_type.md
   - Dialects:
-      - dialects/index.md
+      - Overview: dialects/index.md
       - Heather:
-        - dialects/heather/index.md
-        - Syntax: dialects/heather/syntax.md
-        - Grammar: dialects/heather/grammar.md
+          - Introduction: dialects/heather/index.md
+          - Syntax: dialects/heather/syntax.md
+          - Grammar: dialects/heather/grammar.md
+  - Guides:
+      - Python Guide: python/python_guide.md
+      - Rust Guide: rust/rust_guide.md
+      - Running H-hat: running_hhat.md
+  - Tools:
+      - Toolchain: toolchain.md
+      - CLI: cli.md
+  - Community:
+      - Get Involved: community/get_involved.md
+      - Code of Conduct: community/code_of_conduct.md
+  - Contributing:
+      - How to Contribute: how_contribute.md
+      - Development Setup: contributing/setup.md
   - Blog:
       - blog/index.md
 
