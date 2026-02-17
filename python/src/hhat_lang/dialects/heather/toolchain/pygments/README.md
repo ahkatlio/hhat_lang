@@ -159,8 +159,8 @@ The lexer uses standard Pygments token types, so it works with any Pygments them
 
 The lexer recognizes these file extensions:
 
-- `*.hhat` - H-hat source files
-- `*.hat` - Alternative extension
+- `*.hat` - Default H-hat source file extension
+- `*.hhat` - Alternative extension
 
 ## MIME Types
 
