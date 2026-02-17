@@ -21,39 +21,33 @@ def register_lexer() -> None:
     - hhat-heather
     """
     try:
-        from pygments.lexers import get_lexer_by_name
+        from pygments.lexers import _mapping, get_lexer_by_name
         
-        # Try to get the lexer to see if it's registered
+        # Check if lexer is already registered
         try:
             lexer = get_lexer_by_name("heather")
             print("✓ Heather lexer is already registered")
             print(f"  Name: {lexer.name}")
             print(f"  Aliases: {', '.join(lexer.aliases)}")
-            return
         except Exception:
-            pass
-        
-        # If not registered, register it
-        from pygments.lexers import _mapping
-        
-        lexer_info = (
-            "hhat_lang.dialects.heather.toolchain.pygments.lexer",
-            "Heather",
-            ("heather", "hhat", "hhat-heather"),
-            ("*.hhat", "*.hat"),
-            ("text/x-heather", "text/x-hhat"),
-        )
-        
-        _mapping.LEXERS["HeatherLexer"] = lexer_info
-        
-        print("✓ Heather lexer registered successfully")
-        print("  Aliases: heather, hhat, hhat-heather")
-        print("  File extensions: *.hhat, *.hat")
+            # Register the lexer
+            lexer_info = (
+                "hhat_lang.dialects.heather.toolchain.pygments.lexer",
+                "Heather",
+                ("heather", "hhat", "hhat-heather"),
+                ("*.hat", "*.hhat"),
+                ("text/x-heather", "text/x-hhat"),
+            )
+            
+            _mapping.LEXERS["HeatherLexer"] = lexer_info
+            
+            print("✓ Heather lexer registered successfully")
+            print("  Aliases: heather, hhat, hhat-heather")
+            print("  File extensions: *.hat, *.hhat")
         
     except ImportError:
         print("✗ Pygments is not installed. Install it with:")
         print("  pip install pygments")
-        return
 
 
 def verify_lexer() -> bool:
