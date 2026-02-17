@@ -13,6 +13,17 @@ from pygments.token import (
     Whitespace,
 )
 
+from hhat_lang.dialects.heather.grammar import (
+    FLOAT,
+    ID,
+    INT,
+    MULTILINE_COMMENT,
+    QINT,
+    SINGLE_COMMENT,
+    STRING,
+    WHITESPACE,
+)
+
 __all__ = ["HeatherLexer"]
 
 
@@ -30,7 +41,7 @@ class HeatherLexer(RegexLexer):
     name = "Heather"
     url = "https://docs.hhat-lang.org/"
     aliases = ["heather", "hhat", "hhat-heather"]
-    filenames = ["*.hhat", "*.hat"]
+    filenames = ["*.hat", "*.hhat"]  # .hat is the default extension
     mimetypes = ["text/x-heather", "text/x-hhat"]
 
     # Keywords for control flow and definitions
@@ -42,6 +53,7 @@ class HeatherLexer(RegexLexer):
         "metafn",
         "modifier",
         "metamod",
+        "super-type",
         "type",
         "use",
     )
@@ -56,8 +68,8 @@ class HeatherLexer(RegexLexer):
         "optn_t",
     )
 
-    # Built-in classical types
-    builtin_types_classical = (
+    # Built-in types
+    builtin_types = (
         "bool",
         "f32",
         "f64",
@@ -71,15 +83,9 @@ class HeatherLexer(RegexLexer):
         "str",
         "u32",
         "u64",
-    )
-
-    # Built-in quantum types (prefixed with @)
-    builtin_types_quantum = (
         "@bell_t",
         "@bool",
-        "@false",
         "@int",
-        "@true",
         "@u2",
         "@u3",
         "@u4",
@@ -100,14 +106,13 @@ class HeatherLexer(RegexLexer):
             (r"[ \t\r\n,;]+", Whitespace),
             # Comments
             (r"//[^\n]*\n", Comment.Single),
-            (r"/\*", Comment.Multiline, "comment"),
+            (r"/\-", Comment.Multiline, "comment"),
             # Keywords
             (words(keywords_decl, suffix=r"\b"), Keyword.Declaration),
             (words(keywords_type, suffix=r"\b"), Keyword.Type),
             (words(keywords_reserved, suffix=r"\b"), Keyword.Reserved),
             # Types
-            (words(builtin_types_classical, suffix=r"\b"), Name.Builtin),
-            (words(builtin_types_quantum, suffix=r"\b"), Name.Builtin.Quantum),
+            (words(builtin_types, suffix=r"\b"), Name.Builtin),
             # Boolean literals
             (words(bool_literals, prefix=r"\b", suffix=r"\b"), Name.Constant),
             (words(quantum_bool_literals, prefix=r"\b", suffix=r"\b"), Name.Constant.Quantum),
@@ -125,8 +130,8 @@ class HeatherLexer(RegexLexer):
             (r"\.", Operator),
             # Punctuation
             (r"[(){}\[\]]", Punctuation),
-            # Trait identifier (starts with # and uppercase)
-            (r"#\[", Punctuation, "trait-list"),
+            # Trait identifier (prefix #) - Used for type traits/annotations
+            # Examples: #Printable, #@Quantum
             (r"#@?[A-Z][a-zA-Z0-9\-_]*", Name.Decorator),
             # Modifiers (inside angle brackets)
             (r"<", Punctuation, "modifier"),
@@ -148,15 +153,10 @@ class HeatherLexer(RegexLexer):
             (r"[a-z][a-zA-Z0-9\-_]*", Name),
         ],
         "comment": [
-            (r"[^*/]", Comment.Multiline),
-            (r"/\*", Comment.Multiline, "#push"),
-            (r"\*/", Comment.Multiline, "#pop"),
-            (r"[*/]", Comment.Multiline),
-        ],
-        "trait-list": [
-            (r"\s+", Whitespace),
-            (r"@?[A-Z][a-zA-Z0-9\-_]*", Name.Decorator),
-            (r"\]", Punctuation, "#pop"),
+            (r"[^\-]", Comment.Multiline),
+            (r"/\-", Comment.Multiline, "#push"),
+            (r"\-/", Comment.Multiline, "#pop"),
+            (r"\-", Comment.Multiline),
         ],
         "modifier": [
             (r"\s+", Whitespace),
