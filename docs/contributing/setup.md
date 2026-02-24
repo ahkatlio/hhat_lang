@@ -20,8 +20,7 @@ You'll need:
 
 The Python implementation is on hold, but if you want to explore it:
 
-- **Python**: 3.10 or later
-- **Poetry** or **pip**: For dependency management
+- **Python**: 3.12 or later
 - **Git**: For version control
 
 ## Clone the Repository
@@ -80,16 +79,7 @@ cargo run -- --help
 
 ### Development Tools
 
-#### Rust Analyzer
-
-For VS Code, install the **rust-analyzer** extension for:
-
-- Code completion
-- Inline errors
-- Go to definition
-- Code formatting
-
-#### Clippy (Linter)
+For VS Code, install the **rust-analyzer** extension for better Rust development experience.
 
 Run clippy to catch common mistakes:
 
@@ -97,52 +87,10 @@ Run clippy to catch common mistakes:
 cargo clippy
 ```
 
-#### Rustfmt (Formatter)
-
 Format code according to Rust conventions:
 
 ```bash
 cargo fmt
-```
-
-#### Cargo Audit
-
-Check for security vulnerabilities:
-
-```bash
-cargo install cargo-audit
-cargo audit
-```
-
-### Build Configurations
-
-#### Debug Build (default)
-
-```bash
-cargo build
-```
-
-Includes debug symbols, no optimizations. Use for development.
-
-#### Release Build
-
-```bash
-cargo build --release
-```
-
-Optimized for performance. Use for benchmarking and production.
-
-### Running Specific Tests
-
-```bash
-# Run tests in a specific module
-cargo test --test integration_test
-
-# Run tests matching a pattern
-cargo test parser
-
-# Run with output
-cargo test -- --nocapture
 ```
 
 ## Python Setup (Reference)
@@ -169,17 +117,20 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 Using conda:
 
 ```bash
-conda create -n hhat python=3.10
+conda create -n hhat python=3.12
 conda activate hhat
 ```
 
 ### 3. Install Dependencies
 
-Using pip:
+For full access to H-hat's Python development tools:
 
 ```bash
-pip install -e .
-pip install -e ".[dev]"  # Install development dependencies
+# For bash/sh
+pip install -e .[all,dev]
+
+# For zsh (need quotes)
+pip install -e ".[all,dev]"
 ```
 
 ### 4. Install Pre-commit Hooks
@@ -213,31 +164,6 @@ Run manually:
 pre-commit run --all-files
 ```
 
-## Documentation Development
-
-### Install MkDocs
-
-```bash
-pip install mkdocs-material
-pip install mkdocs-blog-plugin
-```
-
-### Serve Documentation Locally
-
-```bash
-mkdocs serve
-```
-
-Visit [http://localhost:8000](http://localhost:8000) to preview.
-
-### Build Documentation
-
-```bash
-mkdocs build
-```
-
-Output is in `site/` directory.
-
 ## IDE Setup
 
 ### Visual Studio Code
@@ -269,21 +195,49 @@ Install plugins:
 
 Configure Rust toolchain in Settings → Languages & Frameworks → Rust.
 
+## Testing Documentation Locally
+
+If you're working on documentation and want to preview changes locally:
+
+### Install MkDocs
+
+```bash
+pip install mkdocs-material
+pip install mkdocs-blog-plugin
+```
+
+### Serve Documentation
+
+```bash
+mkdocs serve
+```
+
+Visit [http://localhost:8000](http://localhost:8000) to preview.
+
+### Build Documentation
+
+```bash
+mkdocs build
+```
+
+Output is in `site/` directory.
+
 ## Git Workflow
 
 ### Branch Naming Convention
 
-Follow this pattern:
+Branch naming conventions are project-specific. Common patterns include:
 
-```
-impl/<short-description>-<issue-number>
-```
+- `impl/<description>-<issue-number>` for general implementations
+- `dev/python_impl/<description>` for Python-specific work
+- `dev/rust_impl/<description>` for Rust-specific work
 
-Examples:
+Consult with maintainers on Discord about branch naming for your specific contribution.
+
+Examples from recent work:
 
 - `impl/add-python-readmes-93`
 - `impl/reorganize-docs-95`
-- `impl/define-branding-94`
 
 ### Create a Feature Branch
 
@@ -391,5 +345,3 @@ If you encounter issues:
 - Browse [open issues](https://github.com/hhat-lang/hhat_lang/issues)
 - Join the [community](../community/get_involved.md)
 - Start with a [good first issue](https://github.com/hhat-lang/hhat_lang/issues?q=is%3Aissue+state%3Aopen+label%3A%22good+first+issue%22)
-
-Happy coding! 🚀
