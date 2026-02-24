@@ -9,9 +9,9 @@ H-hat provides a comprehensive set of features designed to make quantum programm
 All variables and functions have explicit types known at compile time:
 
 ```heather
-let x: Int = 42;
-let q: Qubit = |0>;
-let state: QubitArray[4] = prepare_ghz_state();
+x:i32 = 42
+p:point = .{x=34 y=43}
+result:status_t = status_t.ON
 ```
 
 This enables:
@@ -23,343 +23,95 @@ This enables:
 
 ### Backend-Aware Types
 
-Types are tagged with their execution backend:
+Types can be tagged with their execution backend (feature in development):
 
 ```heather
-let classical_data: Int@cpu = 100;
-let quantum_data: Qubit@qpu = |+>;
+classical_data:i32@cpu = 100
 ```
 
-The compiler automatically:
+The compiler aims to:
 
-- Routes operations to appropriate backends
-- Manages data transfer between backends
-- Optimizes for target architecture
+- Route operations to appropriate backends
+- Manage data transfer between backends
+- Optimize for target architecture
 
 ### Algebraic Data Types
 
 Define rich data structures with enums and structs:
 
 ```heather
-enum QuantumState {
-    Pure(Qubit),
-    Mixed(DensityMatrix),
-    Entangled(QubitArray)
+type status_t { ON OFF }
+
+type result_t { 
+  data{
+    value:i32
+    elapsed:f64
+  }
+  NONE
 }
 
-struct CircuitResult {
-    state: QuantumState,
-    shots: Int,
-    elapsed: Duration
-}
+type point { x:i32 y:i32 }
 ```
 
 ## Function System
 
-### Explicit Function Overloading
+### Function Definition
 
-Define multiple implementations of the same function:
+Define functions with explicit types:
 
 ```heather
-fn measure(q: Qubit) -> Bool { ... }
-fn measure(qs: QubitArray) -> BitArray { ... }
-fn measure(q: Qubit, basis: PauliBasis) -> Bool { ... }
+fn sum(a:i64 b:i64) i64 { ::add(a b) }
+
+fn print-gt(a:u64 b:u64) {
+  if(
+    gt(a b): print(a)
+    true: print(b)
+  )
+}
 ```
 
-Resolution happens at compile time based on argument types.
+Return uses the `::` syntax sugar for returning expressions.
 
 ### Meta-Functions
 
-Special function-like constructs for control flow and composition:
-
-```heather
-// Option meta-function (like pattern matching)
-match result {
-    Some(value) => process(value),
-    None => default_action()
-}
-
-// Block meta-function
-repeat(10) {
-    apply_gate(q);
-}
-```
-
-### Modifiers
-
-Modifiers change how data is treated:
-
-```heather
-let borrowed: &Qubit = &q;          // Borrow (reference)
-let pointer: *Qubit = *q;           // Pointer (dereference)
-let lazy_val: lazy Int = expensive(); // Lazy evaluation
-let strict_val: strict Int = f();   // Strict evaluation
-```
+Meta-functions provide special control flow constructs. See the [Heather dialect documentation](../dialects/heather/syntax.md) for details.
 
 ## Cast System
 
-### Type Conversion
+H-hat provides a cast system for type conversions. The exact semantics and quantum-specific casts are still being defined. See the [rule system documentation](../rule_system.md) for more information.
 
-Explicit casting between compatible types:
+## Ownership and Resource Management
 
-```heather
-let q: Qubit = |0>;
-let classical: Bool = cast q to Bool;  // Measurement
-```
+H-hat is designed with resource management in mind, particularly important for quantum computing where qubits are limited resources. The exact semantics of ownership, borrowing, and resource management are still being defined.
 
-### Reflective Cast
+See the [rule system documentation](../rule_system.md) for current status.
 
-Special quantum-to-classical conversion that preserves quantum state:
+## Quantum Computing Support
 
-```heather
-let q: Qubit = hadamard(|0>);
-let prob: Float = cast q to Float;  // Get probability without full collapse
-```
+H-hat is designed for quantum-classical hybrid computing. The quantum primitives and backend integration are actively being developed. The compiler framework aims to support multiple quantum architectures through intermediate representations.
 
-This enables:
+## Compiler Framework
 
-- Adaptive algorithms
-- Quantum state tomography
-- Error mitigation strategies
+H-hat uses a multi-stage compilation pipeline:
 
-### Custom Cast Functions
+- Parsing and AST construction
+- Semantic analysis and type checking
+- Multiple intermediate representations (HIR, layout IR, etc.)
+- Backend-specific code generation
+- Optimization passes
 
-Define your own conversion logic:
-
-```heather
-cast fn QubitArray to BitString {
-    // Custom measurement and encoding
-}
-```
-
-## Ownership and Memory Management
-
-### RAII-Like Resource Management
-
-Resources are automatically managed with clear ownership:
-
-```heather
-{
-    let q = allocate_qubit();
-    apply_gates(q);
-    // q is automatically deallocated here
-}
-```
-
-### Borrowing and References
-
-Safely share data without copying:
-
-```heather
-fn apply_twice(q: &Qubit) {
-    hadamard(q);
-    hadamard(q);
-}
-
-let q = |0>;
-apply_twice(&q);  // q is borrowed, not moved
-```
-
-### Move Semantics
-
-Explicit transfer of ownership:
-
-```heather
-let q1 = |0>;
-let q2 = move q1;  // q1 no longer valid
-```
-
-## Evaluation Strategies
-
-### Strict vs Lazy Evaluation
-
-Control when expressions are evaluated:
-
-```heather
-// Strict: evaluated immediately
-let result: strict Int = compute_heavy();
-
-// Lazy: evaluated when needed
-let result: lazy Int = compute_heavy();
-```
-
-This is particularly important for:
-
-- Quantum circuit construction
-- Conditional quantum operations
-- Performance optimization
-
-## Quantum Primitives
-
-### Platform-Independent Instructions
-
-Define general quantum operations:
-
-```heather
-// Generic gate application
-let q = hadamard(|0>);
-let q = cnot(control, target);
-
-// Parameterized gates
-let q = rx(theta, |0>);
-```
-
-### Backend-Specific Optimization
-
-The compiler translates these to architecture-specific implementations:
-
-- Gate decomposition for native gate sets
-- Pulse-level compilation where available
-- Topology-aware routing
-
-## Multi-Architecture Support
-
-### Target Selection
-
-Specify target architectures explicitly:
-
-```heather
-#[target(x86_64)]
-fn classical_processing(data: &[Float]) { ... }
-
-#[target(superconducting)]
-fn quantum_processing(q: Qubit) { ... }
-```
-
-### Cross-Compilation
-
-Build for multiple targets from a single codebase:
-
-```bash
-hhat build --target x86_64
-hhat build --target aarch64
-hhat build --target ion_trap
-```
-
-## Concurrency and Parallelism
-
-### Concurrent Quantum Operations
-
-Express parallel quantum computations:
-
-```heather
-parallel {
-    let result1 = quantum_subroutine1(q1);
-    let result2 = quantum_subroutine2(q2);
-}
-```
-
-### Distributed Computing
-
-Built-in support for distributed execution:
-
-```heather
-@distributed
-fn large_scale_simulation(params: Parameters) {
-    // Automatically distributed across available resources
-}
-```
-
-## Metaprogramming
-
-### Compile-Time Evaluation
-
-Execute code during compilation:
-
-```heather
-const N: Int = 1024;
-const QUBIT_COUNT: Int = log2(N);  // Computed at compile time
-```
-
-### Code Generation
-
-Generate code based on types and constants:
-
-```heather
-#[generate_for(backends = [ion_trap, superconducting])]
-fn optimized_circuit(q: Qubit) { ... }
-```
-
-## Structured Typing
-
-### Duck Typing with Verification
-
-Types can be compatible based on structure:
-
-```heather
-trait Measurable {
-    fn measure(self) -> Bool;
-}
-
-// Any type implementing measure() is Measurable
-```
-
-The compiler verifies structural compatibility at compile time.
-
-## Module System
-
-### Explicit Imports
-
-Clear dependency management:
-
-```heather
-import quantum.gates.{hadamard, cnot};
-import classical.math.{sqrt, cos};
-```
-
-### Namespaces
-
-Organize code into logical modules:
-
-```heather
-module quantum::algorithms {
-    pub fn grover_search(...) { ... }
-    pub fn shor_factorization(...) { ... }
-}
-```
-
-## Safety and Verification
-
-### Type Safety
-
-Strong type system prevents common errors:
-
-- No implicit conversions between quantum and classical
-- Ownership prevents use-after-free
-- Borrow checking prevents data races
-
-### Formal Verification Support
-
-Foundation for proving correctness:
-
-- Type-level guarantees
-- Effect systems for tracking quantum operations
-- Integration points for external provers
+See the [compiler framework documentation](../core/compiler_framework.md) for details.
 
 ## Development Experience
 
-### Clear Error Messages
+H-hat aims to provide a good development experience through:
 
-Helpful compiler diagnostics:
+- Clear and helpful error messages
+- Comprehensive documentation
+- Tooling support (language server, syntax highlighting)
+- Active community on Discord
 
-```
-error: cannot cast Qubit to Int without measurement
-  --> program.hhat:10:5
-   |
-10 |     let x: Int = q;
-   |     ^^^^^^^^^^^^^^^ implicit quantum measurement
-   |
-   = help: use `cast q to Int` to explicitly measure
-```
-
-### Tooling Support
-
-Rich development ecosystem:
-
-- Language server protocol (LSP) implementation
-- Syntax highlighting
-- Debugger integration
-- Package manager
+See the [toolchain documentation](../toolchain.md) for more details on available tools.
 
 ## Next Steps
 
