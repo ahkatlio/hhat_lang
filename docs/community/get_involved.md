@@ -8,9 +8,9 @@ Join our community on the **UnitaryFoundation Discord server** in the **#h-hat**
 
 [![Discord Chat](https://img.shields.io/badge/dynamic/json?color=blue&label=Discord&query=approximate_presence_count&suffix=%20online.&url=https%3A%2F%2Fdiscord.com%2Fapi%2Finvites%2FJqVGmpkP96%3Fwith_counts%3Dtrue)](http://discord.unitary.foundation)
 
-**🔗 Link**: [discord.unitary.foundation](http://discord.unitary.foundation)
+**Link**: [discord.unitary.foundation](http://discord.unitary.foundation)
 
-**📍 Channel**: `#h-hat`
+**Channel**: `#h-hat`
 
 ### What Happens on Discord?
 
@@ -26,32 +26,26 @@ Feel free to drop by just to say hello or chill with the community!
 
 Our code, issues, and discussions are hosted on GitHub:
 
-**🔗 Repository**: [github.com/hhat-lang/hhat_lang](https://github.com/hhat-lang/hhat_lang)
+**Repository**: [github.com/hhat-lang/hhat_lang](https://github.com/hhat-lang/hhat_lang)
 
 ### How to Participate on GitHub
 
-#### 🐛 Report Bugs
+#### Report Bugs
 
-Found a bug? [Open an issue](https://github.com/hhat-lang/hhat_lang/issues/new) with:
+Found a bug? [Open an issue](https://github.com/hhat-lang/hhat_lang/issues/new/choose) and select the appropriate template:
 
-- Clear description of the problem
-- Steps to reproduce
-- Expected vs actual behavior
-- Your environment (OS, H-hat version, etc.)
+- **Bug Report** - For reporting bugs with clear reproduction steps
+- **Feature Request** - For suggesting new features or improvements
+- **Feature Implementation** - For proposing implementation of planned features
+- **Roadmap Item** - For long-term project goals and milestones
 
-#### 💡 Suggest Features
+The templates will guide you through providing the necessary information.
 
-Have an idea? [Create a feature request](https://github.com/hhat-lang/hhat_lang/issues/new) with:
-
-- Description of the feature
-- Use cases and motivation
-- Possible implementation approach (optional)
-
-#### 🙋 Ask Questions
+#### Ask Questions
 
 Not sure if something is a bug? Start a [GitHub Discussion](https://github.com/hhat-lang/hhat_lang/discussions) or ask on Discord.
 
-#### 👨‍💻 Contribute Code
+#### Contribute Code
 
 Ready to contribute? Check out:
 
@@ -59,7 +53,7 @@ Ready to contribute? Check out:
 - [How to Contribute](../how_contribute.md) - Contribution guidelines
 - [Issues Page](https://github.com/hhat-lang/hhat_lang/issues) - All open issues
 
-#### 📖 Improve Documentation
+#### Improve Documentation
 
 Documentation improvements are always welcome:
 
@@ -70,7 +64,7 @@ Documentation improvements are always welcome:
 
 See the `docs/` folder in the repository.
 
-#### ⭐ Star the Repository
+#### Star the Repository
 
 Show your support by starring the repository on GitHub!
 
@@ -84,53 +78,28 @@ H-hat is supported by the Unitary Foundation:
 
 [![Unitary Foundation](https://img.shields.io/badge/Supported%20By-Unitary%20Foundation-FFFF00.svg)](https://unitary.foundation)
 
-**🔗 Website**: [unitary.foundation](https://unitary.foundation)
+**Website**: [unitary.foundation](https://unitary.foundation)
 
 Follow Unitary Foundation for broader quantum computing news and updates.
 
 ## Ways to Contribute
 
-Not sure where to start? Here are some ideas:
+The H-hat project welcomes contributors at all experience levels. Before starting significant work, we encourage you to:
 
-### For Beginners
+- Join the Discord `#h-hat` channel and introduce yourself
+- Discuss your ideas with maintainers to understand project priorities
+- Check existing issues and discussions to avoid duplicate work
+- Ask questions if you're unsure about anything
 
-- Try H-hat and provide feedback
-- Report issues you encounter
-- Improve documentation
-- Help answer questions on Discord
-- Share H-hat with others interested in quantum computing
+Contribution areas include:
 
-### For Developers
+- Reporting bugs and suggesting features
+- Improving documentation and examples
+- Implementing language features (primarily in Rust)
+- Designing quantum algorithms and libraries
+- Providing feedback on language design and usability
 
-- Fix bugs and implement features
-- Improve compiler performance
-- Add backend support for new quantum platforms
-- Develop tooling and IDE plugins
-- Write tests and improve code coverage
-
-### For Quantum Experts
-
-- Design quantum algorithms in H-hat
-- Provide feedback on language design
-- Implement quantum computing libraries
-- Write tutorials and examples
-- Help optimize quantum circuit compilation
-
-### For Language Enthusiasts
-
-- Explore dialect design
-- Implement language features
-- Improve type system
-- Work on formal verification
-- Contribute to language specification
-
-### For Educators
-
-- Create educational content
-- Write tutorials for students
-- Develop course materials
-- Share classroom experiences
-- Provide feedback on learning curve
+For specific contribution workflows and coding standards, see [How to Contribute](../how_contribute.md).
 
 ## Code of Conduct
 
@@ -159,4 +128,4 @@ Contributors are recognized in several ways:
 - **GitHub Issues**: [hhat-lang/hhat_lang/issues](https://github.com/hhat-lang/hhat_lang/issues)
 - **GitHub Discussions**: [hhat-lang/hhat_lang/discussions](https://github.com/hhat-lang/hhat_lang/discussions)
 
-We look forward to seeing you in the community! 🎉
+We look forward to seeing you in the community!
