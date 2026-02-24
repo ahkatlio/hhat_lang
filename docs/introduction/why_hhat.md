@@ -36,12 +36,13 @@ Many quantum frameworks are:
 ### Code Reasoning Closer to Classical Programming
 
 ```heather
-// Quantum variables look and feel like classical ones
-let q: Qubit = |0>;
-let result: Bool = cast q to Bool;
+// Variables with explicit types
+x:i32 = 42
+status:status_t = status_t.ON
+p:point = .{x=10 y=20}
 ```
 
-Rather than thinking about quantum circuits, you manipulate quantum data using familiar constructs like variables, functions, and types.
+H-hat emphasizes familiar programming constructs like variables, functions, and types, making quantum programming more accessible.
 
 ### Unified Programming Model
 
@@ -54,15 +55,14 @@ H-hat treats quantum and classical computation symmetrically:
 
 ### Platform Independence
 
-Write once, target multiple backends:
+H-hat aims to support multiple quantum backends through its compiler framework:
 
-```heather
-// The same code can target different quantum architectures
-let q: Qubit@ion = prepare_state();      // Trapped ion
-let q: Qubit@superconducting = prepare_state();  // Superconducting
-```
+- Unified language regardless of target platform
+- Compiler handles architecture-specific optimizations
+- Backend integration through the IR (Intermediate Representation) system
+- Portable code across different quantum architectures
 
-H-hat's compiler framework handles architecture-specific optimization while keeping your code portable.
+The backend system is actively being developed to support various quantum platforms.
 
 ### Performance Without Compromise
 
@@ -86,7 +86,7 @@ Built-in support for distributed systems patterns:
 
 H-hat is particularly well-suited for:
 
-### ✅ Hybrid Quantum-Classical Algorithms
+### Hybrid Quantum-Classical Algorithms
 
 Algorithms that naturally combine quantum and classical computation:
 
@@ -95,7 +95,7 @@ Algorithms that naturally combine quantum and classical computation:
 - Quantum-enhanced optimization
 - Hybrid simulation methods
 
-### ✅ Cross-Platform Quantum Development
+### Cross-Platform Quantum Development
 
 When you need to:
 
@@ -104,7 +104,7 @@ When you need to:
 - Compare performance across different architectures
 - Future-proof your code against hardware evolution
 
-### ✅ Large-Scale Quantum Software
+### Large-Scale Quantum Software
 
 Projects requiring:
 
@@ -113,7 +113,7 @@ Projects requiring:
 - Integration with existing classical codebases
 - Formal verification and testing
 
-### ✅ Research and Exploration
+### Research and Exploration
 
 When exploring:
 
@@ -124,7 +124,7 @@ When exploring:
 
 ## When H-hat Might Not Be the Right Choice
 
-### ❌ Ultra-Low-Level Hardware Control
+### Ultra-Low-Level Hardware Control
 
 If you need:
 
@@ -134,7 +134,7 @@ If you need:
 
 Consider using hardware-specific SDKs instead.
 
-### ❌ Quick Prototyping on Specific Platforms
+### Quick Prototyping on Specific Platforms
 
 For rapid prototyping on a single platform:
 
@@ -144,7 +144,7 @@ For rapid prototyping on a single platform:
 
 These may offer faster iteration for platform-specific work.
 
-### ❌ Stable Production Systems (Currently)
+### Stable Production Systems (Currently)
 
 Since H-hat is in alpha:
 
