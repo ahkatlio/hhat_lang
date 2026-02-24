@@ -1,6 +1,10 @@
-# Code Organization
+# H-hat Codebase Organization
 
 Understanding how H-hat's codebase is structured will help you navigate the project and contribute effectively.
+
+!!! note
+
+    This guide is for contributors working on H-hat language development itself. If you're looking to write programs in H-hat, see the [Getting Started](../getting_started.md) guide instead.
 
 !!! note
 
